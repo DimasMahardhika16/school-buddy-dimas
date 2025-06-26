@@ -1,0 +1,13 @@
+{
+  "username": "",
+  "email": "",
+  "password": "",
+  "nohp": "",
+  "dataDiri": {
+    "name": "",
+    "ttl": 0,
+    "gender": "",
+    "alamat": ""
+  },
+  "orgName": ""
+}
