@@ -4,6 +4,7 @@ import {
   Checkbox,
   Container,
   Group,
+  Image,
   Paper,
   PasswordInput,
   Text,
@@ -24,7 +25,7 @@ export function LoginPage() {
     if (token) {
       navigate("/dashboard");
     }
-  }, [navigate]);
+  }, []);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -59,6 +60,7 @@ export function LoginPage() {
 
   return (
     <Container size={420} my={100} bg={"blue"} pb={10} pt={10} bdrs={"md"}>
+      <Image src="/logo/logoh.png" radius={"md"} width="50px" />
       <Title ta={"center"} className={classes.title} fw={"bold"}>
         Halo Buddiers!
       </Title>

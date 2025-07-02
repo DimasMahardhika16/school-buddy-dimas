@@ -4,8 +4,14 @@ import { useNavigate } from "react-router";
 export default function TidakDitemukan404() {
   const navigate = useNavigate();
 
-  const handleBackToLogin = () => {
-    navigate("/login");
+  const isLoggedIn = Boolean(localStorage.getItem("token"));
+
+  const handleBack = () => {
+    if (isLoggedIn) {
+      navigate("/dashboard");
+    } else {
+      navigate("/login");
+    }
   };
   return (
     <>
@@ -15,9 +21,9 @@ export default function TidakDitemukan404() {
           radius={"md"}
           ml={30}
           mt={40}
-          onClick={handleBackToLogin}
+          onClick={handleBack}
         >
-          Kembali ke Login
+          {isLoggedIn ? "Kembali ke Dashboard" : "Kembali ke Login"}
         </Button>
       </div>
       <div
@@ -29,6 +35,11 @@ export default function TidakDitemukan404() {
       >
         <h1>What are u looking for?</h1>
         <p>Sorry, the page u are looking doesn't exists</p>
+        <img
+          src="/img/404.svg"
+          alt="404 Not Found"
+          style={{ borderRadius: "50px", width: "20%", height: "30%" }}
+        />
       </div>
     </>
   );

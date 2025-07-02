@@ -76,7 +76,7 @@ export function MainDash({ data }: MainDashProps) {
     if (!token) {
       navigate("/login");
     }
-  }, [navigate]);
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -176,7 +176,16 @@ export function MainDash({ data }: MainDashProps) {
                       span={{ base: 12, sm: 6, lg: 4 }}
                       key={test._id ?? index}
                     >
-                      <Card shadow="md" radius="lg" withBorder>
+                      <Card
+                        shadow="md"
+                        radius="lg"
+                        withBorder
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          height: "100%",
+                        }}
+                      >
                         <Card.Section
                           p="md"
                           style={{
@@ -213,6 +222,7 @@ export function MainDash({ data }: MainDashProps) {
                             backgroundColor: "#4dabf7",
                             padding: "10px",
                             borderRadius: "8px",
+                            flexGrow: 1,
                           }}
                         >
                           <Box
