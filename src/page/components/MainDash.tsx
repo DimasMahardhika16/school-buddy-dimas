@@ -31,6 +31,7 @@ import {
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import type { UserData } from "./types/UserData";
+import { renderTestResult } from "./RenderTestResult";
 
 interface NavbarLinkProps {
   icon: typeof IconHome2;
@@ -125,17 +126,16 @@ export function MainDash({ data }: MainDashProps) {
               Halo, {data?.dataDiri.name ?? "User"} 👋
             </Title>
           </Box>
-          <Box display={"flex"} my={40} w={500}>
+          <Box display={"flex"} my={30} w={500}>
             <Flex direction={"column"}>
               <Flex>
-                <Title order={4} ml={50}>
+                <Title order={4} ml={50} c={"blue"}>
                   Dashboard
                 </Title>
-                <Badge variant="filled" radius={"sm"} ml={20}>
-                  New
-                </Badge>
               </Flex>
-              <Text ml={50}>Get some new information on HomePage</Text>
+              <Text ml={50}>
+                Informasi Penilaian dan Hasil Tes yang Dilakukan
+              </Text>
             </Flex>
           </Box>
 
@@ -167,7 +167,7 @@ export function MainDash({ data }: MainDashProps) {
             {testResults.length > 0 && (
               <Box mt={50}>
                 <Title order={3} ml={50} mb={30} c="blue">
-                  🧪 Hasil Tes Kamu
+                  📑 Hasil Tes Kamu
                 </Title>
 
                 <Grid mx={50} gutter="md">
@@ -210,20 +210,18 @@ export function MainDash({ data }: MainDashProps) {
                         <Box
                           style={{
                             overflowX: "auto",
-                            backgroundColor: "#f9f9f9",
+                            backgroundColor: "#4dabf7",
                             padding: "10px",
                             borderRadius: "8px",
                           }}
                         >
-                          <Text
+                          <Box
                             size="sm"
-                            c="dimmed"
+                            c="white"
                             style={{ whiteSpace: "pre-wrap" }}
                           >
-                            <pre style={{ fontSize: 12, margin: 0 }}>
-                              {JSON.stringify(test.result, null, 2)}
-                            </pre>
-                          </Text>
+                            {renderTestResult(test)}
+                          </Box>
                         </Box>
                       </Card>
                     </Grid.Col>
