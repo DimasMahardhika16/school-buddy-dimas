@@ -81,7 +81,6 @@ export function MainDash({ data }: MainDashProps) {
   const handleLogout = () => {
     localStorage.removeItem("token");
     navigate("/login");
-    sdasd;
   };
 
   const links = mockdata.map((link, index) => (
