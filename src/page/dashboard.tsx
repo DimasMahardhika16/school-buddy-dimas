@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { MainDash } from "./components/MainDash";
 import { useNavigate } from "react-router";
+import type { UserData } from "./components/types/UserData";
 
 export function DashboardPage() {
-  const [getData, setGetData] = useState(null);
+  const [getData, setGetData] = useState<UserData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
@@ -46,8 +47,7 @@ export function DashboardPage() {
 
   return (
     <>
-      <MainDash />
-      {JSON.stringify(getData)}
+      <MainDash data={getData} />
     </>
   );
 }

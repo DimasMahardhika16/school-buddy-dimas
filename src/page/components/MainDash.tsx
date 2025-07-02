@@ -5,7 +5,9 @@ import {
   Button,
   Card,
   Center,
+  Divider,
   Flex,
+  Grid,
   Stack,
   Text,
   ThemeIcon,
@@ -28,6 +30,7 @@ import {
 } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import type { UserData } from "./types/UserData";
 
 interface NavbarLinkProps {
   icon: typeof IconHome2;
@@ -59,7 +62,11 @@ const mockdata = [
   { icon: IconUser, label: "Account" },
 ];
 
-export function MainDash() {
+interface MainDashProps {
+  data: UserData | null;
+}
+
+export function MainDash({ data }: MainDashProps) {
   const [active, setActive] = useState(2);
   const navigate = useNavigate();
 
@@ -83,6 +90,8 @@ export function MainDash() {
       onClick={() => setActive(index)}
     />
   ));
+
+  const testResults = data?.testResult ?? [];
 
   return (
     <AppShell navbar={{ width: 100, breakpoint: "sm" }} padding={"md"}>
@@ -109,52 +118,120 @@ export function MainDash() {
           </Stack>
         </nav>
       </AppShell.Navbar>
-      <AppShell.Main>
+      <AppShell.Main pl={120} pr={20} pb={40}>
         <Box>
-          <h1
-            style={{ marginLeft: "50px", color: "blue", fontFamily: "inherit" }}
-          >
-            Welcome!
-          </h1>
-        </Box>
-        <Box display={"flex"} my={40} w={500}>
-          <Flex direction={"column"}>
-            <Flex>
-              <Title order={4} ml={60}>
-                Dashboard
-              </Title>
-              <Badge variant="filled" radius={"sm"} ml={20}>
-                New
-              </Badge>
+          <Box ml={50} mb={10} mt={10}>
+            <Title order={3} c={"blue"}>
+              Halo, {data?.dataDiri.name ?? "User"} 👋
+            </Title>
+          </Box>
+          <Box display={"flex"} my={40} w={500}>
+            <Flex direction={"column"}>
+              <Flex>
+                <Title order={4} ml={50}>
+                  Dashboard
+                </Title>
+                <Badge variant="filled" radius={"sm"} ml={20}>
+                  New
+                </Badge>
+              </Flex>
+              <Text ml={50}>Get some new information on HomePage</Text>
             </Flex>
-            <Text ml={60}>Get some new information on HomePage</Text>
-          </Flex>
-        </Box>
-        <Box w={500} h={200} ml={20}>
-          <Card
-            padding={90}
-            radius={"md"}
-            withBorder
-            style={{
-              background:
-                "linear-gradient(to bottom, #00ffff,rgb(255, 255, 255) )",
-            }}
-          >
-            <ThemeIcon>
-              <IconUsersPlus />
-            </ThemeIcon>
-            <Text fw={400} mt={10} mb={10}>
-              Invite someone to join your group to make group disscussion and
-              manage group with Group Features
-            </Text>
-            <Button w={250}>
-              <IconArrowLeft style={{ marginRight: "10" }} />
-              Invite your People
-            </Button>
-          </Card>
-        </Box>
-        <Box>
-          <Card>Created Group</Card>
+          </Box>
+
+          <Box w={500} h={320} ml={20}>
+            <Card
+              padding={70}
+              radius={"md"}
+              withBorder
+              style={{
+                background:
+                  "linear-gradient(to bottom, #00ffff,rgb(255, 255, 255) )",
+              }}
+            >
+              <ThemeIcon>
+                <IconUsersPlus />
+              </ThemeIcon>
+              <Text fw={400} mt={10} mb={10}>
+                Invite someone to join your group to make group disscussion and
+                manage group with Group Features
+              </Text>
+              <Button w={250}>
+                <IconArrowLeft style={{ marginRight: "10" }} />
+                Invite your People
+              </Button>
+            </Card>
+          </Box>
+
+          <Box mt={10}>
+            {testResults.length > 0 && (
+              <Box mt={50}>
+                <Title order={3} ml={50} mb={30} c="blue">
+                  🧪 Hasil Tes Kamu
+                </Title>
+
+                <Grid mx={50} gutter="md">
+                  {testResults.map((test, index) => (
+                    <Grid.Col
+                      span={{ base: 12, sm: 6, lg: 4 }}
+                      key={test._id ?? index}
+                    >
+                      <Card shadow="md" radius="lg" withBorder>
+                        <Card.Section
+                          p="md"
+                          style={{
+                            backgroundColor: "#f1f5ff",
+                            borderRadius: "8px",
+                          }}
+                        >
+                          <Flex justify="space-between" align="center">
+                            <Title order={5} c="indigo">
+                              {test.typeTest?.toUpperCase() ??
+                                "Tidak diketahui"}
+                            </Title>
+                            <Badge color="blue" variant="light">
+                              {test.date
+                                ? new Date(test.date).toLocaleDateString(
+                                    "id-ID",
+                                    {
+                                      weekday: "short",
+                                      year: "numeric",
+                                      month: "short",
+                                      day: "numeric",
+                                    }
+                                  )
+                                : "-"}
+                            </Badge>
+                          </Flex>
+                        </Card.Section>
+
+                        <Divider my="sm" />
+
+                        <Box
+                          style={{
+                            overflowX: "auto",
+                            backgroundColor: "#f9f9f9",
+                            padding: "10px",
+                            borderRadius: "8px",
+                          }}
+                        >
+                          <Text
+                            size="sm"
+                            c="dimmed"
+                            style={{ whiteSpace: "pre-wrap" }}
+                          >
+                            <pre style={{ fontSize: 12, margin: 0 }}>
+                              {JSON.stringify(test.result, null, 2)}
+                            </pre>
+                          </Text>
+                        </Box>
+                      </Card>
+                    </Grid.Col>
+                  ))}
+                </Grid>
+              </Box>
+            )}
+          </Box>
         </Box>
       </AppShell.Main>
     </AppShell>
