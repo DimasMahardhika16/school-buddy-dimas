@@ -25,8 +25,9 @@ import {
   IconUser,
 } from "@tabler/icons-react";
 import { useLocation, useNavigate } from "react-router";
-import type { UserData } from "./types/UserData";
+import { country, type UserData } from "./types/UserData";
 import { renderTestResult } from "./RenderTestResult";
+import { PieChart } from "@mantine/charts";
 
 // ✅ Tambahkan union type TestType
 type TestType = "personality" | "tpm" | "ls" | "st" | "sw" | "aw" | "iq";
@@ -160,6 +161,14 @@ export function MainDash({ data }: MainDashProps) {
                   Alamat Sekolah
                 </Title>
                 <Text ml={5}>Jl. Ir.H. Djuanda Dago</Text>
+                <PieChart
+                  h={200}
+                  withLabelsLine
+                  labelsPosition="inside"
+                  labelsType="percent"
+                  withLabels
+                  data={country}
+                />
               </Flex>
             </Box>
 
