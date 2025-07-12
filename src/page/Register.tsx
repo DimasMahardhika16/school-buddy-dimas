@@ -86,14 +86,18 @@ export function RegistPage() {
   };
 
   return (
-    <Container size={500} my={100} bg={"blue"} pt={10} pb={20} bdrs={"md"}>
+    <Container size={500} my={100} bg="cyan.4" pt={10} pb={20} bdrs={"md"}>
       <Title className={classes.title} ta={"center"} fw={"bold"} c={"white"}>
         Registrasi Form
       </Title>
       <Text className={classes.subtitle} fw={"normal"} c={"white"}>
         Silahkan Buat Akun Anda!
       </Text>
-      <Button variant="filled" onClick={() => navigate("/login")}>
+      <Button
+        variant="filled"
+        color="cyan.4"
+        onClick={() => navigate("/login")}
+      >
         <IconArrowLeft size={20} stroke={4} />
       </Button>
 
@@ -163,7 +167,7 @@ export function RegistPage() {
         <Button
           variant="filled"
           radius={"md"}
-          color="blue"
+          color="cyan.4"
           mt={10}
           onClick={handleSubmit}
         >

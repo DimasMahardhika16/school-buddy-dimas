@@ -9,6 +9,12 @@ export function DashboardPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/login", { replace: true });
+      return;
+    }
+
     async function getDataBuddy() {
       const ambilData = localStorage.getItem("token") ?? "";
       if (!ambilData) {
@@ -28,12 +34,18 @@ export function DashboardPage() {
 
         if (!res.ok) {
           localStorage.removeItem("token");
-          navigate("/login");
+          navigate("/login", { replace: true });
           return;
         }
 
         const gotData = await res.json();
         setGetData(gotData.data);
+
+        // ✅ Tambahkan ini
+        if (gotData.data.role) {
+          localStorage.setItem("role", gotData.data.role);
+        }
+
         setIsLoading(false);
         console.log("Fetched buddy data");
       } catch (err) {

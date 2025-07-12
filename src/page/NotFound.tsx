@@ -33,8 +33,8 @@ export default function TidakDitemukan404() {
           background: "linear-gradient(to right, #00ffff, #ffffff)",
         }}
       >
-        <h1>What are u looking for?</h1>
-        <p>Sorry, the page u are looking doesn't exists</p>
+        <h1>What are you looking for?</h1>
+        <p>Sorry, the page you are looking doesn't exists</p>
         <img
           src="/img/404.svg"
           alt="404 Not Found"
