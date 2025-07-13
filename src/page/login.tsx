@@ -85,14 +85,14 @@ export function LoginPage() {
 
   return (
     <Container
-      size={420}
+      size={"sm"}
       my={100}
       pb={20}
       pt={10}
       bdrs={"md"}
-      bd={"3px solid cyan.4"}
+      // bd={"3px solid cyan.4"}
     >
-      <Image src="/logo/logoh.png" radius={"md"} width="50px" />
+      <Image src="/logo/logoh.png" radius={"md"} h="100px" />
       <Title ta={"center"} className={classes.title} fw={"bold"} c="cyan.4">
         Halo Buddiers!
       </Title>
@@ -104,7 +104,7 @@ export function LoginPage() {
         </Anchor>
       </Text>
 
-      <Paper withBorder shadow="sm" p={22} mt={30} radius={"md"}>
+      <Paper withBorder shadow="0" p={"xl"} mt={30} radius={"md"}>
         <form onSubmit={handleLogin}>
           <TextInput
             label="Username atau Email"
